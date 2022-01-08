@@ -1,2 +1,3 @@
-export * from "./use-theme";
+export * from "./use-auth";
 export * from "./use-classes";
+export * from "./use-theme";

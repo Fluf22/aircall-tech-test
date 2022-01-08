@@ -22,5 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# WebStorm folder
+# Editor folders
 .idea
+.vscode

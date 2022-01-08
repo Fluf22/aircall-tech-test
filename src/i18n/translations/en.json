@@ -1,3 +1,17 @@
 {
-	"welcome": "Welcome!"
+	"welcome": "Welcome!",
+	"calls": {
+		"title": "Calls page"
+	},
+	"archives": {
+		"title": "Archives page"
+	},
+	"login": {
+		"title": "Login page",
+		"form": {
+			"username": "Your username",
+			"password": "Your password",
+			"submit": "Submit"
+		}
+	}
 }

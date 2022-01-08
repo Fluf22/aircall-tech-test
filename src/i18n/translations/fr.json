@@ -1,3 +1,17 @@
 {
-	"welcome": "Bonjour !"
+	"welcome": "Bonjour !",
+	"calls": {
+		"title": "Page des Appels"
+	},
+	"archives": {
+		"title": "Page des Archives"
+	},
+	"login": {
+		"title": "Page de connexion",
+		"form": {
+			"username": "Votre nom",
+			"password": "Votre mot de passe",
+			"submit": "Envoyer"
+		}
+	}
 }
