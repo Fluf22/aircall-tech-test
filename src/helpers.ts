@@ -21,8 +21,8 @@ export const isTokenExpired = (token: string, timeInterval: TokenRefreshInterval
         const decodedPayload: string = atob(tokenPayload);
         const { exp } = JSON.parse(decodedPayload);
         const now = (new Date()).getTime();
-        const maxTimeBeforeRefresh = now - timeInterval;
-        return exp >= maxTimeBeforeRefresh;
+        const maxTimeBeforeRefresh = exp * 1000 - timeInterval;
+        return now >= maxTimeBeforeRefresh;
     } catch (err) {
         console.error("Err during token issuance parsing: ", err);
         return false;
