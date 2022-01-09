@@ -1,6 +1,7 @@
-import { API_BASE_URL, checkStatus, parseJSON } from "../helpers";
+import { API_BASE_URL, checkStatus, ITEMS_PER_PAGE, parseJSON } from "../helpers";
+import { Call, GetCallsResponse } from "../interfaces";
 
-export const fetchCalls = (token: string, offset: number = 0, limit: number = 10) => {
+export const fetchCalls = (token: string, offset: number = 0, limit: number = ITEMS_PER_PAGE): Promise<GetCallsResponse> => {
     const headers = { "Authorization": `Bearer ${token}` };
     return fetch(`${API_BASE_URL}/calls?offset=${offset}&limit=${limit}`, { headers })
         .then(checkStatus)
@@ -10,7 +11,7 @@ export const fetchCalls = (token: string, offset: number = 0, limit: number = 10
         });
 };
 
-export const addNote = (token: string, callId: string, content: string) => {
+export const addNote = (token: string, callId: string, content: string): Promise<Call> => {
     const headers = { "Authorization": `Bearer ${token}`, "content-type": "application/json" };
     const body = JSON.stringify({ content });
     return fetch(`${API_BASE_URL}/calls/${callId}/note`, { method: "POST", headers, body })
@@ -21,7 +22,7 @@ export const addNote = (token: string, callId: string, content: string) => {
         });
 };
 
-export const triggerArchiveStatus = (token: string, callId: string) => {
+export const triggerArchiveStatus = (token: string, callId: string): Promise<Call> => {
     const headers = { "Authorization": `Bearer ${token}` };
     return fetch(`${API_BASE_URL}/calls/${callId}/archive`, { method: "PUT", headers })
         .then(checkStatus)

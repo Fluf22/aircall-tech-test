@@ -57,5 +57,3 @@ export interface GetCallsResponse {
     totalCount: number;
     hasNextPage: boolean;
 }
-
-export type PostNoteBody = Pick<Note, "content">;
