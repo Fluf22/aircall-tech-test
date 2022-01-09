@@ -6,6 +6,7 @@ export const PUSHER_APP_CLUSTER = "eu";
 export const PUSHER_APP_AUTH_ENDPOINT = "https://frontend-test-api.aircall.io/pusher/auth";
 export const PUSHER_CHANNEL_NAME = "private-aircall";
 export const PUSHER_CHANNEL_EVENT = "update-call";
+export const ITEMS_PER_PAGE = 10;
 
 export const checkStatus = (response: Response) => {
     if (response.status >= 200 && response.status < 300) {
