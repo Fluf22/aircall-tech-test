@@ -9,8 +9,8 @@ import "./i18n";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<CssBaseline/>
-		<Frame/>
+		<CssBaseline />
+		<Frame />
 	</React.StrictMode>,
 	document.getElementById("root")
 );

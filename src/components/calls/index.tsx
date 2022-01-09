@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { fetchCalls } from "../../services";
 import { Call, GetCallsResponse } from "../../interfaces";
 import { useAuth } from "../../hooks";
+import Pusher from "pusher-js";
+import { PUSHER_APP_AUTH_ENDPOINT, PUSHER_APP_CLUSTER, PUSHER_APP_KEY, PUSHER_CHANNEL_EVENT, PUSHER_CHANNEL_NAME } from "../../helpers";
 
 const Calls = () => {
 	const [translate] = useTranslation();
@@ -12,6 +14,19 @@ const Calls = () => {
 	const [calls, setCalls] = useState<Call[]>([]);
 	const [hasNextPage, setHasNextPage] = useState<boolean>(false);
 	const [totalCount, setTotalCount] = useState<number>(0);
+
+	useEffect(() => {
+		const pusher = new Pusher(PUSHER_APP_KEY, {
+			cluster: PUSHER_APP_CLUSTER,
+			authEndpoint: PUSHER_APP_AUTH_ENDPOINT,
+			auth: { headers: { "Authorization": `Bearer ${accessToken}` } }
+		});
+		const channel = pusher.subscribe(PUSHER_CHANNEL_NAME);
+		channel.bind(PUSHER_CHANNEL_EVENT, (data: any) => {
+			console.log("Data from push event: ", data);
+		});
+		return () => channel.unbind(PUSHER_CHANNEL_EVENT).unsubscribe();
+	}, [accessToken]);
 
 	useEffect(() => {
 		fetchCalls(accessToken).then((response: GetCallsResponse) => {
