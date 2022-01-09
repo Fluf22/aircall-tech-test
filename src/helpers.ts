@@ -34,3 +34,11 @@ export const isTokenExpired = (token: string, timeInterval: TokenRefreshInterval
         return false;
     }
 };
+
+export const isSameDay = (memberStr: string, otherStr: string) => {
+    const member = new Date(memberStr);
+    const other = new Date(otherStr);
+    return member.getDate() === other.getDate()
+        && member.getMonth() === other.getMonth()
+        && member.getFullYear() === other.getFullYear();
+};
