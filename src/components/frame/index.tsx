@@ -1,16 +1,14 @@
 import { Box, StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useTheme } from "../../hooks";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import LoadingOverlay from "../loading-overlay";
 import classes from './styles.module.css';
 import AuthProvider from "../auth/auth-provider";
 
 const ProtectedRoute = lazy(() => import("../auth/protected-route"));
-const App = lazy(() => import("../app"));
 const Login = lazy(() => import("../login"));
 const Calls = lazy(() => import("../calls"));
-const Archives = lazy(() => import("../archives"));
 
 const Frame = () => {
 	const { background, colorMode, theme } = useTheme();
@@ -20,12 +18,14 @@ const Frame = () => {
 			<ThemeProvider theme={theme}>
 				<StyledEngineProvider injectFirst>
 					<Box sx={{ background }} className={classes.frame}>
-						<AuthProvider>
-							<BrowserRouter>
+						<BrowserRouter>
+							<AuthProvider>
 								<Routes>
 									<Route path={"/"} element={
 										<Suspense fallback={<LoadingOverlay />}>
-											<App />
+											<ProtectedRoute>
+												<Calls />
+											</ProtectedRoute>
 										</Suspense>
 									} />
 									<Route path={"/login"} element={
@@ -33,23 +33,12 @@ const Frame = () => {
 											<Login />
 										</Suspense>
 									} />
-									<Route path={"/calls"} element={
-										<Suspense fallback={<LoadingOverlay />}>
-											<ProtectedRoute>
-												<Calls />
-											</ProtectedRoute>
-										</Suspense>
-									} />
-									<Route path={"/archives"} element={
-										<Suspense fallback={<LoadingOverlay />}>
-											<ProtectedRoute>
-												<Archives />
-											</ProtectedRoute>
-										</Suspense>
+									<Route path={"*"} element={
+										<Navigate to={'/'} replace={true} />
 									} />
 								</Routes>
-							</BrowserRouter>
-						</AuthProvider>
+							</AuthProvider>
+						</BrowserRouter>
 					</Box>
 				</StyledEngineProvider>
 			</ThemeProvider>
