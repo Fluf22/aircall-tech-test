@@ -1,8 +1,8 @@
-import { Button, Stack, TextField, Typography } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useEffect, useState } from 'react';
-import { ITEMS_PER_PAGE } from '../../helpers';
+import { Button, Stack, TextField, Typography } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useEffect, useState } from "react";
+import { ITEMS_PER_PAGE } from "../../helpers";
 
 interface PaginationProps {
     total: number;
