@@ -32,7 +32,7 @@ describe('Response parsing as JSON', () => {
 describe('Check token expiration', () => {
     const now = new Date();
     const mockToken = (exp: number) => {
-        const payload = { exp };
+        const payload = { exp: exp / 1000 };
         const payloadStr = JSON.stringify(payload);
         const encodedPayload = btoa(payloadStr);
         return `fakeHeader.${encodedPayload}.fakeSignature`;
