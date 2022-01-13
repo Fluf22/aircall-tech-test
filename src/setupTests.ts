@@ -1,5 +1,8 @@
 import '@testing-library/jest-dom';
-import { unmountComponentAtNode } from 'react-dom';
+import { queryByAttribute, render, RenderOptions } from '@testing-library/react';
+import { ReactElement } from 'react';
+import Frame from './components/frame';
+import "./i18n"
 
 export let container: HTMLDivElement | null = null;
 let originalError: any = null;
@@ -9,19 +12,16 @@ beforeAll(() => {
     console.error = jest.fn();
 });
 
-beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-});
-
-afterEach(() => {
-    if (container != null) {
-        unmountComponentAtNode(container);
-        container.remove();
-        container = null;
-    }
-});
-
 afterAll(() => {
     console.error = originalError;
 });
+
+const customRender = (
+    ui: ReactElement,
+    options?: Omit<RenderOptions, 'wrapper'>,
+) => render(ui, { wrapper: Frame, ...options });
+
+export const getById = queryByAttribute.bind(null, "id");
+
+export * from '@testing-library/react';
+export { customRender as render };

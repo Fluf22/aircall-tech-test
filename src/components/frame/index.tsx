@@ -1,16 +1,14 @@
 import { Box, StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useTheme } from "../../hooks";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
-import LoadingOverlay from "../loading-overlay";
+import { BrowserRouter } from "react-router-dom";
 import classes from './styles.module.css';
 import AuthProvider from "../auth/auth-provider";
 
-const ProtectedRoute = lazy(() => import("../auth/protected-route"));
-const Login = lazy(() => import("../login"));
-const Calls = lazy(() => import("../calls"));
+interface FrameProps {
+	children: JSX.Element;
+}
 
-const Frame = () => {
+const Frame = ({ children }: FrameProps) => {
 	const { background, colorMode, theme } = useTheme();
 
 	return (
@@ -20,23 +18,7 @@ const Frame = () => {
 					<Box sx={{ background }} className={classes.frame}>
 						<BrowserRouter>
 							<AuthProvider>
-								<Routes>
-									<Route path={"/"} element={
-										<Suspense fallback={<LoadingOverlay />}>
-											<ProtectedRoute>
-												<Calls />
-											</ProtectedRoute>
-										</Suspense>
-									} />
-									<Route path={"/login"} element={
-										<Suspense fallback={<LoadingOverlay />}>
-											<Login />
-										</Suspense>
-									} />
-									<Route path={"*"} element={
-										<Navigate to={'/'} replace={true} />
-									} />
-								</Routes>
+								{children}
 							</AuthProvider>
 						</BrowserRouter>
 					</Box>
