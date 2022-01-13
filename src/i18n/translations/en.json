@@ -11,7 +11,11 @@
 		"form": {
 			"username": "Your username",
 			"password": "Your password",
-			"submit": "Submit"
+			"submit": "Submit",
+			"error": {
+				"username": "Username required. 128 characters maximum.",
+				"password": "Password required. 128 characters maximum."
+			}
 		}
 	}
 }

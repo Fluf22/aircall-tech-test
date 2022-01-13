@@ -11,7 +11,11 @@
 		"form": {
 			"username": "Votre nom",
 			"password": "Votre mot de passe",
-			"submit": "Envoyer"
+			"submit": "Envoyer",
+			"error": {
+				"username": "Nom obligatoire. 128 caractères maximum.",
+				"password": "Mot de passe obligatoire. 128 caractères maximum."
+			}
 		}
 	}
 }
