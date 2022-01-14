@@ -1,4 +1,4 @@
-import { authRefresh, authSignin } from ".";
+import { authRefresh, authSignin } from "./auth";
 
 describe("Auth API service", () => {
     let refreshToken: string | null = null;

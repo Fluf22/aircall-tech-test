@@ -1,4 +1,4 @@
-import { authSignin, fetchCalls, triggerArchiveStatus } from ".";
+import { authSignin, fetchCalls, triggerArchiveStatus } from "./index";
 import { AuthResponse, Call, GetCallsResponse } from "../interfaces";
 
 describe("Calls API service", () => {
