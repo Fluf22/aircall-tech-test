@@ -35,7 +35,6 @@ const Login = () => {
     const onFormSubmit = (data: LoginFormSchema) => {
         if (data.honeypot === "") {
             auth.signin(data.username, data.password, () => {
-                console.log("Hello")
                 navigate(from, { replace: true });
             }).finally(() => {
                 setIsLoading(false);

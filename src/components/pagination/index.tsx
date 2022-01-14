@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import { Grid, Button, TextField, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useEffect, useState } from "react";
@@ -52,37 +52,46 @@ const Pagination = ({ total, handlePageUpdate }: PaginationProps) => {
 
     if (total > ITEMS_PER_PAGE) {
         return (
-            <Stack direction={"row"} spacing={2} alignItems={"center"}>
-                <Button
-                    variant={"contained"}
-                    disabled={page === 1}
-                    onClick={(event: any) => handleChange(event, page - 1)}
-                    aria-label="previous page"
-                >
-                    <ArrowBackIosIcon />
-                </Button>
-                <Typography variant={"h6"}>
-                    <TextField
-                        id={"pagination-page"}
-                        value={currentPage}
-                        onChange={({ target: { value } }) => handleCurrentPageChange(undefined, value)}
-                        onKeyUp={(event) => handleInput(event)}
-                        variant={"standard"}
-                        sx={{ width: "33px" }}
-                        inputProps={{
-                            "aria-label": "current page"
+            <Grid container justifyContent={"space-between"} alignItems={"center"} my={2}>
+                <Grid item>
+                    <Button
+                        variant={"contained"}
+                        disabled={page === 1}
+                        onClick={(event: any) => handleChange(event, page - 1)}
+                        aria-label="previous page"
+                        sx={{
+                            pl: "24px"
                         }}
-                    /> / {pageQty}
-                </Typography>
-                <Button
-                    variant={"contained"}
-                    disabled={page === pageQty}
-                    onClick={(event: any) => handleChange(event, page + 1)}
-                    aria-label="next page"
-                >
-                    <ArrowForwardIosIcon />
-                </Button>
-            </Stack>
+                    >
+                        <ArrowBackIosIcon />
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Typography variant={"h6"}>
+                        <TextField
+                            id={"pagination-page"}
+                            value={currentPage}
+                            onChange={({ target: { value } }) => handleCurrentPageChange(undefined, value)}
+                            onKeyUp={(event) => handleInput(event)}
+                            variant={"standard"}
+                            sx={{ width: "33px" }}
+                            inputProps={{
+                                "aria-label": "current page"
+                            }}
+                        /> / {pageQty}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Button
+                        variant={"contained"}
+                        disabled={page === pageQty}
+                        onClick={(event: any) => handleChange(event, page + 1)}
+                        aria-label="next page"
+                    >
+                        <ArrowForwardIosIcon />
+                    </Button>
+                </Grid>
+            </Grid>
         );
     } else {
         return null;
