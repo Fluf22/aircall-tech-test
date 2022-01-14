@@ -1,13 +1,38 @@
 {
 	"welcome": "Welcome!",
 	"calls": {
-		"title": "Calls page"
-	},
-	"archives": {
-		"title": "Archives page"
+		"title": "History",
+		"call-direction": {
+			"outbound": "Outbound call",
+			"inbound": "Inbound call"
+		},
+		"call-type": {
+			"missed": "Missed",
+			"voicemail": "Voicemail",
+			"answered": "Answered"
+		},
+		"call-archived": "Archived",
+		"call-details-button": "See call details",
+		"call-details": {
+			"id": "ID:",
+			"direction": "Direction:",
+			"from": "From: ",
+			"to": "To: ",
+			"duration": "Duration: ",
+			"is-archived": "Archived state: ",
+			"call-type": "Type: ",
+			"via": "Via: ",
+			"created-at": "Created at: ",
+			"note-title": "Note",
+			"new-note": "New note",
+			"archive-status": {
+				"true": "Archived",
+				"false": "Not archived"
+			}
+		}
 	},
 	"login": {
-		"title": "Login page",
+		"title": "Login",
 		"form": {
 			"username": "Your username",
 			"password": "Your password",
