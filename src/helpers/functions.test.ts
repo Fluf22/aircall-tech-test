@@ -1,14 +1,14 @@
-import { isSameDay, isTokenExpired, parseJSON } from '.';
+import { humanReadableDuration, isSameDay, isTokenExpired, parseJSON } from '.';
 import { TokenRefreshInterval } from '../interfaces';
 import { checkStatus } from './functions';
 
 describe('Check request response status', () => {
-    it('should send back the response', () => {
+    it('Should send back the response', () => {
         const response = new Response(undefined, { status: 200, statusText: '200' });
         const check = checkStatus(response);
         expect(check).toMatchObject(response);
     });
-    it('should throw on error', () => {
+    it('Should throw on error', () => {
         const response = new Response(undefined, { status: 500, statusText: '500' });
         const throwingCheck = () => {
             checkStatus(response);
@@ -18,7 +18,7 @@ describe('Check request response status', () => {
 });
 
 describe('Response parsing as JSON', () => {
-    it('should parse the response body as JSON', async () => {
+    it('Should parse the response body as JSON', async () => {
         const body = { test: "random" };
         const bodyStr = JSON.stringify(body);
         const response = new Response(bodyStr);
@@ -38,27 +38,27 @@ describe('Check token expiration', () => {
         return `fakeHeader.${encodedPayload}.fakeSignature`;
     };
 
-    it('should be an expired access token', () => {
+    it('Should be an expired access token', () => {
         const exp = now.getTime();
         const isExpired = isTokenExpired(mockToken(exp), TokenRefreshInterval.ACCESS);
         expect(isExpired).toBe(true);
     });
 
-    it('should be a valid access token', () => {
+    it('Should be a valid access token', () => {
         const exp = new Date(now);
         exp.setMinutes(exp.getMinutes() + 10);
         const isExpired = isTokenExpired(mockToken(exp.getTime()), TokenRefreshInterval.ACCESS);
         expect(isExpired).toBe(false);
     });
 
-    it('should be an expired refresh token', () => {
+    it('Should be an expired refresh token', () => {
         const exp = new Date(now);
         exp.setMinutes(exp.getMinutes() - 1);
         const isExpired = isTokenExpired(mockToken(exp.getTime()), TokenRefreshInterval.REFRESH);
         expect(isExpired).toBe(true);
     });
 
-    it('should be a valid refresh token', () => {
+    it('Should be a valid refresh token', () => {
         const exp = new Date(now);
         exp.setMinutes(exp.getMinutes() + 1);
         const isExpired = isTokenExpired(mockToken(exp.getTime()), TokenRefreshInterval.REFRESH);
@@ -67,7 +67,7 @@ describe('Check token expiration', () => {
 });
 
 describe('Same day check', () => {
-    it('should pass the same day test', () => {
+    it('Should pass the same day test', () => {
         const now = new Date();
         const todayHours = now.getHours();
         const nowStr = now.toLocaleString();
@@ -81,11 +81,31 @@ describe('Same day check', () => {
         expect(sameDay).toBe(true);
     });
 
-    it('should not pass the same day test', () => {
+    it('Should not pass the same day test', () => {
         const now = new Date();
         const other = new Date();
         other.setHours(other.getHours() - 24);
         const sameDay = isSameDay(now.toString(), other.toString());
         expect(sameDay).toBe(false);
+    });
+});
+
+describe('Seconds to human readable duration', () => {
+    it('Should display 12:00:00', () => {
+        const secondsQty: number = 60 * 60 * 12;
+        const result = humanReadableDuration(secondsQty);
+        expect(result).toBe("12:00:00");
+    });
+
+    it('Should display 00:00:07', () => {
+        const secondsQty: number = 7;
+        const result = humanReadableDuration(secondsQty);
+        expect(result).toBe("00:00:07");
+    });
+
+    it('Should display 123:45:09', () => {
+        const secondsQty: number = (60 * 60 * 123) + (60 * 45) + 9;
+        const result = humanReadableDuration(secondsQty);
+        expect(result).toBe("123:45:09");
     });
 });

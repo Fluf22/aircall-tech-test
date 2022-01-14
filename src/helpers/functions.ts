@@ -34,3 +34,15 @@ export const isSameDay = (memberStr: string, otherStr: string) => {
         && member.getMonth() === other.getMonth()
         && member.getFullYear() === other.getFullYear();
 };
+
+export const humanReadableDuration = (durationInSeconds: number) => {
+    let hours = Math.floor(durationInSeconds / 3600);
+    let minutes = Math.floor((durationInSeconds - (hours * 3600)) / 60);
+    let seconds = durationInSeconds - (hours * 3600) - (minutes * 60);
+    let result: string = "";
+
+    result = result + (hours < 10 ? "0" + hours : hours) + ":";
+    result = result + (minutes < 10 ? "0" + minutes : minutes) + ":";
+    result = result + (seconds < 10 ? "0" + seconds : seconds);
+    return result;
+};
