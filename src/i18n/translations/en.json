@@ -1,5 +1,9 @@
 {
-	"welcome": "Welcome!",
+	"language": "Language",
+	"languages": {
+		"fr": "French",
+		"en": "English"
+	},
 	"calls": {
 		"title": "History",
 		"call-direction": {

@@ -1,5 +1,9 @@
 {
-	"welcome": "Bonjour !",
+	"language": "Langue",
+	"languages": {
+		"fr": "Français",
+		"en": "Anglais"
+	},
 	"calls": {
 		"title": "Appels récents",
 		"call-direction": {

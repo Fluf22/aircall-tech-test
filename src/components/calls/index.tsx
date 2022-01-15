@@ -10,6 +10,7 @@ import { isSameDay, PUSHER_APP_AUTH_ENDPOINT, PUSHER_APP_CLUSTER, PUSHER_APP_KEY
 import Pagination from "../pagination";
 import LoadingOverlay from "../loading-overlay";
 import CallSummary from "./call-summary";
+import LanguageSelector from "../language-selector";
 
 const Calls = () => {
 	const [translate] = useTranslation();
@@ -48,19 +49,26 @@ const Calls = () => {
 	return (
 		<Container maxWidth="md" sx={{ height: "100%", minWidth: "375px" }}>
 			<Grid container p={2} className={classes.root}>
-				<Grid item xs={12} minHeight={"5vh"} height={"fit-content"} my={5}>
-					<Typography
-						variant={"h1"}
-						sx={{
-							fontSize: {
-								xs: "33px",
-								sm: "66px",
-								md: "99px"
-							}
-						}}
-					>
-						{translate("calls.title")}
-					</Typography>
+				<Grid item xs={12} minHeight={"5vh"} height={"fit-content"} my={5} container justifyContent={"space-between"} alignItems={"center"}>
+					<Grid item xs={6}>
+						<Typography
+							variant={"h1"}
+							sx={{
+								fontSize: {
+									xs: "33px",
+									sm: "66px",
+									md: "99px"
+								}
+							}}
+						>
+							{translate("calls.title")}
+						</Typography>
+					</Grid>
+					<Grid item xs={6} container justifyContent={"flex-end"}>
+						<Grid item>
+							<LanguageSelector />
+						</Grid>
+					</Grid>
 				</Grid>
 				<Grid item xs={12} container data-testid={`calls-summary-items`}>
 					{
