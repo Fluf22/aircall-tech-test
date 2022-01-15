@@ -1,4 +1,4 @@
-import { humanReadableDuration, isSameDay, isTokenExpired, parseJSON } from '.';
+import { humanReadableDuration, isInvalidText, isSameDay, isTokenExpired, parseJSON } from '.';
 import { TokenRefreshInterval } from '../interfaces';
 import { checkStatus } from './functions';
 
@@ -107,5 +107,37 @@ describe('Seconds to human readable duration', () => {
         const secondsQty: number = (60 * 60 * 123) + (60 * 45) + 9;
         const result = humanReadableDuration(secondsQty);
         expect(result).toBe("123:45:09");
+    });
+});
+
+describe('Check text validity', () => {
+    it('Should be a valid text', () => {
+        const text: string = "This is a valid text.";
+        const result: boolean = isInvalidText(text);
+        expect(result).toBe(false);
+    });
+
+    it('Should be an invalid empty text', () => {
+        const text: string = "";
+        const result: boolean = isInvalidText(text);
+        expect(result).toBe(true);
+    });
+
+    it('Should be an invalid undefined text', () => {
+        const text: undefined = undefined;
+        const result: boolean = isInvalidText(text);
+        expect(result).toBe(true);
+    });
+
+    it('Should be an invalid null text', () => {
+        const text: null = null;
+        const result: boolean = isInvalidText(text);
+        expect(result).toBe(true);
+    });
+
+    it('Should be a non-string invalid content', () => {
+        const text: number = 5432167;
+        const result: boolean = isInvalidText(text);
+        expect(result).toBe(true);
     });
 });
