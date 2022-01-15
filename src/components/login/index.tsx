@@ -30,7 +30,7 @@ const Login = () => {
         resolver: yupResolver(loginFormSchema)
     });
 
-    const from = location.state?.from?.pathname || "/";
+    const from = (location.state as any)?.from?.pathname || "/";
 
     const onFormSubmit = (data: LoginFormSchema) => {
         if (data.honeypot === "") {
