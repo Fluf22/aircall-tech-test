@@ -2,6 +2,7 @@ import { Call } from "../../interfaces";
 import { render, screen } from "../../setupTests";
 import CallSummary from "./call-summary";
 
+// For each use case, check that the right icons are in place, with the right data, formatted if necessary, and eventually with specific style
 describe("CallSummary component", () => {
     const archivedMissedInboundCall: Call = {
         "id": "a3060487-6f8a-4825-b8db-4472139b8c9b",
