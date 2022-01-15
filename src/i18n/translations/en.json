@@ -14,6 +14,7 @@
 		"call-archived": "Archived",
 		"call-details-button": "See call details",
 		"call-details": {
+			"close": "Close",
 			"id": "ID:",
 			"direction": "Direction:",
 			"from": "From: ",

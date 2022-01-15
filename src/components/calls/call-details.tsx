@@ -80,28 +80,42 @@ const CallDetails = ({ call }: CallDetailsProps) => {
     return (
         <>
             <Tooltip title={translate("calls.call-details-button") || ""}>
-                <IconButton size={"small"} aria-label={translate("calls.call-details-button")} onClick={() => setDialogOpen(true)} sx={{ p: 0 }} disabled={isLoading}>
-                    <OpenInFullIcon />
-                </IconButton>
+                <span>
+                    <IconButton
+                        size={"small"}
+                        aria-label={translate("calls.call-details-button")}
+                        onClick={() => setDialogOpen(true)}
+                        sx={{ p: 0 }}
+                        disabled={isLoading}
+                        data-testid={"open-call-details-dialog"}
+                    >
+                        <OpenInFullIcon />
+                    </IconButton>
+                </span>
             </Tooltip>
             <Dialog
                 fullScreen={fullScreen}
                 open={isDialogOpen}
                 onClose={handleClose}
                 TransitionComponent={Transition}
+                data-testid={"call-details-dialog"}
             >
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={handleClose}
-                            aria-label="close"
-                            disabled={isLoading}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                        <Tooltip title={translate("calls.call-details.close") || ""}>
+                            <span>
+                                <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    onClick={handleClose}
+                                    aria-label={translate("calls.call-details.close")}
+                                    disabled={isLoading}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                            </span>
+                        </Tooltip>
+                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
                             {title}
                         </Typography>
                         {
@@ -109,15 +123,23 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <CircularProgress sx={{ color: "white", width: "30px !important", height: "30px !important" }} />
                             ) : (
                                 <Tooltip title={translate(`calls.call-details.${call.is_archived ? "unarchive" : "archive"}-call`) || ""}>
-                                    <Button color="inherit" onClick={() => triggerStatus()} disabled={isLoading}>
-                                        {
-                                            call.is_archived ? (
-                                                <UnarchiveIcon />
-                                            ) : (
-                                                <ArchiveIcon />
-                                            )
-                                        }
-                                    </Button>
+                                    <span>
+                                        <Button
+                                            color="inherit"
+                                            onClick={() => triggerStatus()}
+                                            disabled={isLoading}
+                                            id={`${call.is_archived ? "unarchive" : "archive"}-call-button`}
+                                            data-testid={"call-details-archive-call-button"}
+                                        >
+                                            {
+                                                call.is_archived ? (
+                                                    <UnarchiveIcon />
+                                                ) : (
+                                                    <ArchiveIcon />
+                                                )
+                                            }
+                                        </Button>
+                                    </span>
                                 </Tooltip>
                             )
                         }
@@ -130,7 +152,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.id")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"caption"}>{call.id}</Typography>
+                                <Typography data-testid={"call-details-id"} variant={"caption"}>{call.id}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -138,7 +160,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.direction")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{translate(`calls.call-direction.${call.direction}`)}</Typography>
+                                <Typography data-testid={"call-details-direction"} variant={"body1"}>{translate(`calls.call-direction.${call.direction}`)}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -146,7 +168,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.from")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{call.from}</Typography>
+                                <Typography data-testid={"call-details-from"} variant={"body1"}>{call.from}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -154,7 +176,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.to")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{call.to}</Typography>
+                                <Typography data-testid={"call-details-to"} variant={"body1"}>{call.to}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -162,7 +184,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.via")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{call.via}</Typography>
+                                <Typography data-testid={"call-details-via"} variant={"body1"}>{call.via}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -170,7 +192,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.created-at")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{(new Date(call.created_at)).toLocaleString()}</Typography>
+                                <Typography data-testid={"call-details-created-at"} variant={"body1"}>{(new Date(call.created_at)).toLocaleString()}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -178,7 +200,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.duration")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{humanReadableDuration(call.duration)}</Typography>
+                                <Typography data-testid={"call-details-duration"} variant={"body1"}>{humanReadableDuration(call.duration)}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -186,7 +208,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.call-type")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{translate(`calls.call-type.${call.call_type}`)}</Typography>
+                                <Typography data-testid={"call-details-call-type"} variant={"body1"}>{translate(`calls.call-type.${call.call_type}`)}</Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container alignItems={"center"} mb={2}>
@@ -194,7 +216,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                 <Typography variant={"caption"}>{translate("calls.call-details.is-archived")} </Typography>
                             </Grid>
                             <Grid item xs={"auto"}>
-                                <Typography variant={"body1"}>{translate(`calls.call-details.archive-status.${call.is_archived}`)}</Typography>
+                                <Typography data-testid={"call-details-is-archived"} variant={"body1"}>{translate(`calls.call-details.archive-status.${call.is_archived}`)}</Typography>
                             </Grid>
                         </Grid>
                         {
@@ -207,8 +229,9 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                         defaultValue={note.content}
                                         variant={"outlined"}
                                         InputProps={{
-                                            readOnly: true
-                                        }}
+                                            readOnly: true,
+                                            "data-testid": `call-details-note-${idx + 1}`
+                                        } as any}
                                         fullWidth
                                     />
                                 </Grid>
@@ -217,9 +240,20 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                         {
                             noteContent === undefined ? (
                                 <Grid item xs={12}>
-                                    <Button variant={"contained"} color={"primary"} sx={{ width: "100%" }} disabled={isLoading} onClick={() => setNoteContent("")}>
-                                        <AddIcon />
-                                    </Button>
+                                    <Tooltip title={translate("calls.call-details.new-note") || ""}>
+                                        <span>
+                                            <Button
+                                                variant={"contained"}
+                                                color={"primary"}
+                                                sx={{ width: "100%" }}
+                                                disabled={isLoading}
+                                                onClick={() => setNoteContent("")}
+                                                data-testid={"add-note-button"}
+                                            >
+                                                <AddIcon />
+                                            </Button>
+                                        </span>
+                                    </Tooltip>
                                 </Grid>
                             ) : (
                                 <Grid item xs={12} container>
@@ -232,33 +266,42 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                             onChange={({ target: { value } }) => setNoteContent(value)}
                                             variant={"outlined"}
                                             fullWidth
+                                            inputProps={{
+                                                "data-testid": "add-note-input"
+                                            } as any}
                                         />
                                     </Grid>
                                     <Grid item xs={12} container justifyContent={"flex-end"}>
                                         <Grid item>
                                             <Tooltip title={translate("calls.call-details.send-note") || ""}>
-                                                <Button
-                                                    variant={"contained"}
-                                                    color={"primary"}
-                                                    disabled={isLoading || isNoteContentInvalid}
-                                                    onClick={() => sendNote()}
-                                                >
-                                                    <SendIcon />
-                                                </Button>
+                                                <span>
+                                                    <Button
+                                                        variant={"contained"}
+                                                        color={"primary"}
+                                                        disabled={isLoading || isNoteContentInvalid}
+                                                        onClick={() => sendNote()}
+                                                        data-testid={"send-note-button"}
+                                                    >
+                                                        <SendIcon />
+                                                    </Button>
+                                                </span>
                                             </Tooltip>
                                         </Grid>
                                         {
                                             call.is_archived === false ? (
                                                 <Grid item ml={2}>
                                                     <Tooltip title={translate("calls.call-details.send-note-and-archive") || ""}>
-                                                        <Button
-                                                            variant={"contained"}
-                                                            color={"primary"}
-                                                            disabled={isLoading || isNoteContentInvalid}
-                                                            onClick={() => sendNoteAndArchiveCall()}
-                                                        >
-                                                            <SendAndArchiveIcon />
-                                                        </Button>
+                                                        <span>
+                                                            <Button
+                                                                variant={"contained"}
+                                                                color={"primary"}
+                                                                disabled={isLoading || isNoteContentInvalid}
+                                                                onClick={() => sendNoteAndArchiveCall()}
+                                                                data-testid={"send-note-and-archive-button"}
+                                                            >
+                                                                <SendAndArchiveIcon />
+                                                            </Button>
+                                                        </span>
                                                     </Tooltip>
                                                 </Grid>
                                             ) : undefined
