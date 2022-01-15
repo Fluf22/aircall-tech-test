@@ -25,6 +25,10 @@
 			"created-at": "Créé à : ",
 			"note-title": "Note",
 			"new-note": "Nouvelle note",
+			"archive-call": "Archiver",
+			"unarchive-call": "Désarchiver",
+			"send-note": "Envoyer la note",
+			"send-note-and-archive": "Envoyer la note et archiver l'appel",
 			"archive-status": {
 				"true": "Archivé",
 				"false": "Non archivé"

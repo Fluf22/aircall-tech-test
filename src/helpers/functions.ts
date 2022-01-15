@@ -46,3 +46,7 @@ export const humanReadableDuration = (durationInSeconds: number) => {
     result = result + (seconds < 10 ? "0" + seconds : seconds);
     return result;
 };
+
+export const isInvalidText = (text: any) => {
+    return text == null || typeof text !== "string" || text.length === 0;
+};

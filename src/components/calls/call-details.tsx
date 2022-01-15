@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import AddIcon from '@mui/icons-material/Add';
-import { humanReadableDuration } from '../../helpers';
+import { humanReadableDuration, isInvalidText } from '../../helpers';
 import { addNote, triggerArchiveStatus } from '../../services';
 import SendIcon from '@mui/icons-material/Send';
 import SendAndArchiveIcon from '@mui/icons-material/SendAndArchive';
@@ -36,11 +36,16 @@ const CallDetails = ({ call }: CallDetailsProps) => {
     const [title, setTitle] = useState<string>("");
     const [noteContent, setNoteContent] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isNoteContentInvalid, setIsNoteContentInvalid] = useState<boolean>(true);
     const auth = useAuth();
 
     useEffect(() => {
         setTitle(`${translate(`calls.call-direction.${call.direction}`)} - ${call.direction === "outbound" ? call.to : call.from}`)
     }, [call, translate]);
+
+    useEffect(() => {
+        setIsNoteContentInvalid(isInvalidText(noteContent));
+    }, [noteContent]);
 
     const handleClose = () => {
         if (!isLoading) {
@@ -64,7 +69,7 @@ const CallDetails = ({ call }: CallDetailsProps) => {
         });
     };
 
-    const sendAndArchiveNote = () => {
+    const sendNoteAndArchiveCall = () => {
         setIsLoading(true);
         addNote(auth.accessToken, call.id, noteContent!).then(() => triggerArchiveStatus(auth.accessToken, call.id)).finally(() => {
             setNoteContent(undefined);
@@ -103,15 +108,17 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                             isLoading ? (
                                 <CircularProgress sx={{ color: "white", width: "30px !important", height: "30px !important" }} />
                             ) : (
-                                <Button color="inherit" onClick={() => triggerStatus()} disabled={isLoading}>
-                                    {
-                                        call.is_archived ? (
-                                            <UnarchiveIcon />
-                                        ) : (
-                                            <ArchiveIcon />
-                                        )
-                                    }
-                                </Button>
+                                <Tooltip title={translate(`calls.call-details.${call.is_archived ? "unarchive" : "archive"}-call`) || ""}>
+                                    <Button color="inherit" onClick={() => triggerStatus()} disabled={isLoading}>
+                                        {
+                                            call.is_archived ? (
+                                                <UnarchiveIcon />
+                                            ) : (
+                                                <ArchiveIcon />
+                                            )
+                                        }
+                                    </Button>
+                                </Tooltip>
                             )
                         }
                     </Toolbar>
@@ -229,16 +236,30 @@ const CallDetails = ({ call }: CallDetailsProps) => {
                                     </Grid>
                                     <Grid item xs={12} container justifyContent={"flex-end"}>
                                         <Grid item>
-                                            <Button variant={"contained"} color={"primary"} disabled={isLoading} onClick={() => sendNote()}>
-                                                <SendIcon />
-                                            </Button>
+                                            <Tooltip title={translate("calls.call-details.send-note") || ""}>
+                                                <Button
+                                                    variant={"contained"}
+                                                    color={"primary"}
+                                                    disabled={isLoading || isNoteContentInvalid}
+                                                    onClick={() => sendNote()}
+                                                >
+                                                    <SendIcon />
+                                                </Button>
+                                            </Tooltip>
                                         </Grid>
                                         {
                                             call.is_archived === false ? (
                                                 <Grid item ml={2}>
-                                                    <Button variant={"contained"} color={"primary"} disabled={isLoading} onClick={() => sendAndArchiveNote()}>
-                                                        <SendAndArchiveIcon />
-                                                    </Button>
+                                                    <Tooltip title={translate("calls.call-details.send-note-and-archive") || ""}>
+                                                        <Button
+                                                            variant={"contained"}
+                                                            color={"primary"}
+                                                            disabled={isLoading || isNoteContentInvalid}
+                                                            onClick={() => sendNoteAndArchiveCall()}
+                                                        >
+                                                            <SendAndArchiveIcon />
+                                                        </Button>
+                                                    </Tooltip>
                                                 </Grid>
                                             ) : undefined
                                         }

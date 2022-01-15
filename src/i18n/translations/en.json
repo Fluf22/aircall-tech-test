@@ -25,6 +25,10 @@
 			"created-at": "Created at: ",
 			"note-title": "Note",
 			"new-note": "New note",
+			"archive-call": "Archive",
+			"unarchive-call": "Unarchive",
+			"send-note": "Send note",
+			"send-note-and-archive": "Send note and archive call",
 			"archive-status": {
 				"true": "Archived",
 				"false": "Not archived"
