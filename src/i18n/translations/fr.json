@@ -1,3 +1,55 @@
 {
-	"welcome": "Bonjour !"
+	"language": "Langue",
+	"languages": {
+		"fr": "Français",
+		"en": "Anglais"
+	},
+	"calls": {
+		"title": "Appels récents",
+		"call-direction": {
+			"outbound": "Appel sortant",
+			"inbound": "Appel entrant"
+		},
+		"call-type": {
+			"missed": "Manqué",
+			"voicemail": "Messagerie",
+			"answered": "Répondu"
+		},
+		"call-archived": "Archivé",
+		"call-details-button": "Voir les détails",
+		"call-details": {
+			"close": "Fermer",
+			"id": "ID :",
+			"direction": "Direction :",
+			"from": "De : ",
+			"to": "Vers : ",
+			"duration": "Durée : ",
+			"is-archived": "État d'archivage : ",
+			"call-type": "Type: ",
+			"via": "Via: ",
+			"created-at": "Créé à : ",
+			"note-title": "Note",
+			"new-note": "Nouvelle note",
+			"archive-call": "Archiver",
+			"unarchive-call": "Désarchiver",
+			"send-note": "Envoyer la note",
+			"send-note-and-archive": "Envoyer la note et archiver l'appel",
+			"archive-status": {
+				"true": "Archivé",
+				"false": "Non archivé"
+			}
+		}
+	},
+	"login": {
+		"title": "Connexion",
+		"form": {
+			"username": "Votre nom",
+			"password": "Votre mot de passe",
+			"submit": "Envoyer",
+			"error": {
+				"username": "Nom obligatoire. 128 caractères maximum.",
+				"password": "Mot de passe obligatoire. 128 caractères maximum."
+			}
+		}
+	}
 }

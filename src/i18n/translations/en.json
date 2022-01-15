@@ -1,3 +1,55 @@
 {
-	"welcome": "Welcome!"
+	"language": "Language",
+	"languages": {
+		"fr": "French",
+		"en": "English"
+	},
+	"calls": {
+		"title": "History",
+		"call-direction": {
+			"outbound": "Outbound call",
+			"inbound": "Inbound call"
+		},
+		"call-type": {
+			"missed": "Missed",
+			"voicemail": "Voicemail",
+			"answered": "Answered"
+		},
+		"call-archived": "Archived",
+		"call-details-button": "See call details",
+		"call-details": {
+			"close": "Close",
+			"id": "ID:",
+			"direction": "Direction:",
+			"from": "From: ",
+			"to": "To: ",
+			"duration": "Duration: ",
+			"is-archived": "Archived state: ",
+			"call-type": "Type: ",
+			"via": "Via: ",
+			"created-at": "Created at: ",
+			"note-title": "Note",
+			"new-note": "New note",
+			"archive-call": "Archive",
+			"unarchive-call": "Unarchive",
+			"send-note": "Send note",
+			"send-note-and-archive": "Send note and archive call",
+			"archive-status": {
+				"true": "Archived",
+				"false": "Not archived"
+			}
+		}
+	},
+	"login": {
+		"title": "Login",
+		"form": {
+			"username": "Your username",
+			"password": "Your password",
+			"submit": "Submit",
+			"error": {
+				"username": "Username required. 128 characters maximum.",
+				"password": "Password required. 128 characters maximum."
+			}
+		}
+	}
 }

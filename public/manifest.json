@@ -1,6 +1,6 @@
 {
-  "short_name": "React Starter Template",
-  "name": "React Starter Template with router, UI library, i18n, lazy loading and more",
+  "short_name": "Aircall tech test",
+  "name": "Aircall use case for tech interview",
   "icons": [
     {
       "src": "favicon.ico",
