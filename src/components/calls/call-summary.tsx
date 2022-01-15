@@ -38,16 +38,16 @@ const CallSummary = ({ call }: CallProps) => {
                     <Tooltip title={translate(`calls.call-direction.${call.direction}`) || ""}>
                         {
                             isOutbound ? (
-                                <CallMadeIcon />
+                                <CallMadeIcon data-testid={"call-summary-made-icon"} />
                             ) : (
-                                <CallReceivedIcon />
+                                <CallReceivedIcon data-testid={"call-summary-received-icon"} />
                             )
                         }
                     </Tooltip>
                 </Grid>
                 <Grid item xs={9} container>
                     <Grid item xs={12}>
-                        <Typography variant={"h6"} color={call.call_type === "missed" ? "red" : "inherit"}>
+                        <Typography data-testid={"call-summary-number"} variant={"h6"} color={call.call_type === "missed" ? "red" : "inherit"}>
                             {
                                 isOutbound ? call.to : call.from
                             }
@@ -58,17 +58,17 @@ const CallSummary = ({ call }: CallProps) => {
                             <Tooltip title={translate(`calls.call-type.${call.call_type}`) || ""}>
                                 {
                                     call.call_type === "missed" ? (
-                                        <CallMissedIcon />
+                                        <CallMissedIcon data-testid={"call-summary-missed-icon"} />
                                     ) : call.call_type === "voicemail" ? (
-                                        <VoicemailIcon />
+                                        <VoicemailIcon data-testid={"call-summary-voicemail-icon"} />
                                     ) : (
-                                        <CallIcon />
+                                        <CallIcon data-testid={"call-summary-answered-icon"} />
                                     )
                                 }
                             </Tooltip>
                         </Grid>
                         <Grid item>
-                            <Typography variant={"caption"} color={"darkgrey"}>{callDateTime}</Typography>
+                            <Typography variant={"caption"} color={"darkgrey"} data-testid={"call-summary-datetime"}>{callDateTime}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -78,7 +78,7 @@ const CallSummary = ({ call }: CallProps) => {
                     {
                         call.is_archived ? (
                             <Tooltip title={translate("calls.call-archived") || ""}>
-                                <ArchiveIcon />
+                                <ArchiveIcon data-testid={"call-summary-archive-icon"} />
                             </Tooltip>
                         ) : undefined
                     }

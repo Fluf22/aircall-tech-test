@@ -62,7 +62,7 @@ const Calls = () => {
 						{translate("calls.title")}
 					</Typography>
 				</Grid>
-				<Grid item xs={12} container>
+				<Grid item xs={12} container data-testid={`calls-summary-items`}>
 					{
 						isLoading ? (
 							<LoadingOverlay />
@@ -80,7 +80,7 @@ const Calls = () => {
 						))
 					}
 				</Grid>
-				<Grid item xs={12} sx={{ display: "flex", alignItems: "flex-end" }} mt={3}>
+				<Grid item xs={12} sx={{ display: "flex", alignItems: "flex-end" }} mt={3} data-testid={`calls-pagination`}>
 					<Pagination total={totalCount} handlePageUpdate={handlePageUpdate} />
 				</Grid>
 			</Grid>
