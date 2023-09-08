@@ -2,7 +2,7 @@
 
 ## Use case
 
-The document can be found [here](https://github.com/aircall/frontend-hiring-test).
+The document can be found [here](https://github.com/aircall/frontend-hiring-test/blob/1d20f65e396ab3ef7e56c448c0e22cadfad9deaa/README.md).
 
 ## Tech stack
 
